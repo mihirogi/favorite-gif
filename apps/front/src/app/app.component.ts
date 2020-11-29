@@ -9,8 +9,8 @@ import { map, reduce, tap } from 'rxjs/operators';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  giphyKey = '';
-  tenorKey = '';
+  giphyKey = '5zmsyd8mTvRapj6yIJgnXV3wpaztCC90';
+  tenorKey = 'XN69R2387M93';
 
   giphyItems$: Observable<string[]>;
   tenorItems$: Observable<string[]>;
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   }
 
   searchForTenor(keyword: string) {
-    const url = `https://api.tenor.com/v1/search?q=${keyword}&key=${this.tenorKey}&limit=2`;
+    const url = `https://api.tenor.com/v1/search?q=${keyword}&key=${this.tenorKey}&limit=2&pos=0`;
     this.tenorItems$ = this.http.get<Tenor>(url).pipe(
       map((v) => v.results),
       map((v) => v.map((r) => r.media[0].gif.url))
