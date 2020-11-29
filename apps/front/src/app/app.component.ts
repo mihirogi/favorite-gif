@@ -60,8 +60,6 @@ interface IImage extends IRendition {
   size?: string;
 }
 
-interface IURLAsset extends IImage {}
-
 interface IMP4 {
   mp4: string;
   mp4_size: string;

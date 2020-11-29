@@ -32,9 +32,6 @@
     "front-e2e": {
       "tags": [],
       "implicitDependencies": ["front"]
-    },
-    "backend": {
-      "tags": []
     }
   }
 }
