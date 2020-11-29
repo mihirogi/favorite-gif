@@ -67,6 +67,7 @@
     "cypress": "^5.5.0",
     "dotenv": "6.2.0",
     "eslint": "7.10.0",
+    "husky": "^4.3.0",
     "jest": "26.2.2",
     "jest-preset-angular": "8.3.1",
     "prettier": "2.1.2",
@@ -74,5 +75,11 @@
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
     "typescript": "~4.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "git add . && npm run format && npm run affected:lint && npm run affected:build && npm run affected:test -- --parallel",
+      "pre-push": "npm run build && npm run test"
+    }
   }
 }
