@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, merge } from 'rxjs';
+import { Observable, merge, from } from 'rxjs';
 import { map, reduce, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GifService {
+  limit = 50;
+  offset = 0;
+
   giphyKey = '';
   tenorKey = '';
 
@@ -17,7 +20,7 @@ export class GifService {
   constructor(private http: HttpClient) {}
 
   searchForGiphy(keyword: string): Observable<string[]> {
-    const url = `https://api.giphy.com/v1/gifs/search?api_key=${this.giphyKey}&q=${keyword}&limit=2&offset=0&rating=g&lang=en`;
+    const url = `https://api.giphy.com/v1/gifs/search?api_key=${this.giphyKey}&q=${keyword}&limit=${this.limit}&offset=0&rating=g&lang=en`;
     return (this.giphyItems$ = this.http.get<Giphy>(url).pipe(
       map((v) => v.data),
       map((v) => v.map((r) => r.images.original.url))
@@ -25,7 +28,7 @@ export class GifService {
   }
 
   searchForTenor(keyword: string): Observable<string[]> {
-    const url = `https://api.tenor.com/v1/search?q=${keyword}&key=${this.tenorKey}&limit=2&pos=0`;
+    const url = `https://api.tenor.com/v1/search?q=${keyword}&key=${this.tenorKey}&limit=${this.limit}&pos=0`;
     return (this.tenorItems$ = this.http.get<Tenor>(url).pipe(
       map((v) => v.results),
       map((v) => v.map((r) => r.media[0].gif.url))

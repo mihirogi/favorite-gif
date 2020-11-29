@@ -1,4 +1,4 @@
-<h1>hello world</h1>
+<h1>Gif Search</h1>
 <section>
   <input type="text" #giphyKeyword />
   <button (click)="searchForGiphy(giphyKeyword.value)">Giphy</button>
@@ -13,19 +13,28 @@
 </section>
 <section>
   <h2>Giphy</h2>
-  <div *ngFor="let url of giphyItems$ | async">
-    <img src="{{ url }}" />
-  </div>
+  <ng-template #elseGiphy><div>No Result</div></ng-template>
+  <ng-container *ngIf="0 < (giphyItems$ | async)?.length; else elseGiphy">
+    <div *ngFor="let url of giphyItems$ | async">
+      <img src="{{ url }}" />
+    </div>
+  </ng-container>
 </section>
 <section>
   <h2>Tenor</h2>
-  <div *ngFor="let url of tenorItems$ | async">
-    <img src="{{ url }}" />
-  </div>
+  <ng-template #elseTenor><div>No Result</div></ng-template>
+  <ng-container *ngIf="0 < (tenorItems$ | async)?.length; else elseTenor">
+    <div *ngFor="let url of tenorItems$ | async">
+      <img src="{{ url }}" />
+    </div>
+  </ng-container>
 </section>
 <section>
   <h2>Merge</h2>
-  <div *ngFor="let url of mergeItems$ | async">
-    <img src="{{ url }}" />
-  </div>
+  <ng-template #elseMerge><div>No Result</div></ng-template>
+  <ng-container *ngIf="0 < (mergeItems$ | async)?.length; else elseMerge">
+    <div *ngFor="let url of mergeItems$ | async">
+      <img src="{{ url }}" />
+    </div>
+  </ng-container>
 </section>
