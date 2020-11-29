@@ -1,1 +1,31 @@
-<p>home works!</p>
+<h1>hello world</h1>
+<section>
+  <input type="text" #giphyKeyword />
+  <button (click)="searchForGiphy(giphyKeyword.value)">Giphy</button>
+  <input type="text" #tenorKeyword />
+  <button (click)="searchForTenor(tenorKeyword.value)">
+    Tenorで検索します
+  </button>
+  <input type="text" #mergeKeyword />
+  <button (click)="searchForMerge(mergeKeyword.value)">
+    GiphyとTenorで検索します
+  </button>
+</section>
+<section>
+  <h2>Giphy</h2>
+  <div *ngFor="let url of giphyItems$ | async">
+    <img src="{{ url }}" />
+  </div>
+</section>
+<section>
+  <h2>Tenor</h2>
+  <div *ngFor="let url of tenorItems$ | async">
+    <img src="{{ url }}" />
+  </div>
+</section>
+<section>
+  <h2>Merge</h2>
+  <div *ngFor="let url of mergeItems$ | async">
+    <img src="{{ url }}" />
+  </div>
+</section>
