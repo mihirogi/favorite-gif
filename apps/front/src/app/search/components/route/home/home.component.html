@@ -13,18 +13,18 @@
 </section>
 <section>
   <h2>Giphy</h2>
-  <ng-template #elseGiphy><div>No Result</div></ng-template>
-  <ng-container *ngIf="0 < (giphyItems$ | async)?.length; else elseGiphy">
-    <div *ngFor="let url of giphyItems$ | async">
+  <ng-container *ngIf="giphyItems$ | async as giphyItems; else elseGiphy">
+    <div *ngFor="let url of giphyItems">
       <img src="{{ url }}" />
     </div>
   </ng-container>
+  <ng-template #elseGiphy><div>No Result</div></ng-template>
 </section>
 <section>
   <h2>Tenor</h2>
   <ng-template #elseTenor><div>No Result</div></ng-template>
-  <ng-container *ngIf="0 < (tenorItems$ | async)?.length; else elseTenor">
-    <div *ngFor="let url of tenorItems$ | async">
+  <ng-container *ngIf="tenorItems$ | async as tenorItems; else elseTenor">
+    <div *ngFor="let url of tenorItems">
       <img src="{{ url }}" />
     </div>
   </ng-container>
@@ -32,8 +32,8 @@
 <section>
   <h2>Merge</h2>
   <ng-template #elseMerge><div>No Result</div></ng-template>
-  <ng-container *ngIf="0 < (mergeItems$ | async)?.length; else elseMerge">
-    <div *ngFor="let url of mergeItems$ | async">
+  <ng-container *ngIf="mergeItems$ | async as mergeItems; else elseMerge">
+    <div *ngFor="let url of mergeItems">
       <img src="{{ url }}" />
     </div>
   </ng-container>

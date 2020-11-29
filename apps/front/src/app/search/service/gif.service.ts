@@ -7,11 +7,11 @@ import { map, reduce, tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class GifService {
-  limit = 50;
+  limit = 2;
   offset = 0;
 
-  giphyKey = '';
-  tenorKey = '';
+  giphyKey = '5zmsyd8mTvRapj6yIJgnXV3wpaztCC90';
+  tenorKey = 'XN69R2387M93';
 
   giphyItems$: Observable<string[]>;
   tenorItems$: Observable<string[]>;
@@ -23,6 +23,8 @@ export class GifService {
     const url = `https://api.giphy.com/v1/gifs/search?api_key=${this.giphyKey}&q=${keyword}&limit=${this.limit}&offset=0&rating=g&lang=en`;
     return (this.giphyItems$ = this.http.get<Giphy>(url).pipe(
       map((v) => v.data),
+      tap((v) => console.log(v.length)),
+      tap(console.log),
       map((v) => v.map((r) => r.images.original.url))
     ));
   }
@@ -31,6 +33,8 @@ export class GifService {
     const url = `https://api.tenor.com/v1/search?q=${keyword}&key=${this.tenorKey}&limit=${this.limit}&pos=0`;
     return (this.tenorItems$ = this.http.get<Tenor>(url).pipe(
       map((v) => v.results),
+      tap((v) => console.log(v.length)),
+      tap(console.log),
       map((v) => v.map((r) => r.media[0].gif.url))
     ));
   }
@@ -40,6 +44,7 @@ export class GifService {
     this.searchForTenor(keyword);
     return (this.mergeItems$ = merge(this.giphyItems$, this.tenorItems$).pipe(
       reduce((res, item) => res.concat(item), []),
+      tap((v) => console.log(v.length)),
       tap(console.log)
     ));
   }
