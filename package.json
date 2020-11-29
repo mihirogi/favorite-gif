@@ -25,7 +25,10 @@
     "update": "ng update @nrwl/workspace",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "preinstall": "npx check-node-version --node 14",
+    "prestart": "npx check-node-version --node 14",
+    "pretest": "npx check-node-version --node 14"
   },
   "private": true,
   "dependencies": {
@@ -79,7 +82,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "git add . && npm run format && npm run affected:lint && npm run affected:build && npm run affected:test -- --parallel",
-      "pre-push": "npm run build && npm run test"
+      "pre-push": " npx nx run-many --target=build --configuration=production --all --parallel && npx nx run-many --target=test --all --parallel"
     }
   }
 }

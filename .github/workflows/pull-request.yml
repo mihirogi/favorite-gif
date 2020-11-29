@@ -1,0 +1,39 @@
+name: 'PullRequest'
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.2
+        with:
+          version: 14
+      - name: npm dependencies
+        run: npm ci
+      - name: build
+        run: npx nx run-many --target=build --configuration=production --all --parallel
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.2
+        with:
+          version: 14
+      - name: npm dependencies
+        run: npm ci
+      - name: test
+        run: npx nx run-many --target=test --all --parallel
+  validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.2
+        with:
+          version: 14
+      - name: npm dependencies
+        run: npm ci
+      - name: format check
+        run: npm run format:check
+      - name: lint
+        run: npx nx run-many --target=lint --all
