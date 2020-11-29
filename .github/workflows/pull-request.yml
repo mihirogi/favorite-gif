@@ -34,6 +34,6 @@ jobs:
       - name: npm dependencies
         run: npm ci
       - name: format check
-        run: npm run format:check -- --base=master
+        run: npm run format:check
       - name: lint
         run: npx nx run-many --target=lint --all
