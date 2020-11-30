@@ -10,8 +10,8 @@ export class GifService {
   limit = 2;
   offset = 0;
 
-  giphyKey = '5zmsyd8mTvRapj6yIJgnXV3wpaztCC90';
-  tenorKey = 'XN69R2387M93';
+  giphyKey = '';
+  tenorKey = '';
 
   giphyItems$: Observable<string[]>;
   tenorItems$: Observable<string[]>;
